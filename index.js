@@ -1,3 +1,5 @@
+// A bunch of comments
+
 let hasBlackJack=false
 let isAlive=false
 let foundanace=false
