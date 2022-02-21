@@ -1,5 +1,3 @@
-// A bunch of comments
-
 let hasBlackJack=false
 let isAlive=false
 let foundanace=false
@@ -62,7 +60,6 @@ console.clear()
     let filenamevalue=""
     foundanace=false
 
-    // Display cards
     for(let i = 0; i < cards.length; i++)
     {
         if (cards[i].name === "A"){filenamevalue="ace"}
@@ -77,29 +74,17 @@ console.clear()
         if (cards[i].suit === "H") {filenamesuit="hearts"}
         
         filename = "images/" + filenamesuit + "_" + filenamevalue + ".png"
-
-        console.log(cards[i])
-
-        //cardsEl.textContent += cards[i].name + cards[i].suit + " "
         cardsEl.innerHTML += '<img src="'+ filename + '" id=cardimg alt="' +  cards[i].name + cards[i].suit + '" width="150" height="210" margin="15">'
     }
 
-    
-    console.log(sum)
-   
-    // Display sum
-    //sumEl.textContent="Sum: " + sum
-
-    // Logic
     if(sum <= 20){
         message = "Draw?"    
     } else if (sum === 21){
         message = "Blackack!"
         hasBlackJack = true
-        console.log ("diabling button")
         document.getElementById("newcard-el").disabled = true;
         winnerEl.textContent = "Player wins!"
-    }else { // is there an ace I can rurn into a 1
+    }else { 
         for(let i = 0; i < cards.length; i++)
         {
             if (cards[i].name === "A" && cards[i].gonewild === false)
@@ -107,7 +92,6 @@ console.clear()
                 cards[i].value = 1
                 cards[i].gonewild=true
                 sum = sum - 10
-                console.log("Found an ace")
                 foundanace=true
             }          
         }
@@ -116,24 +100,15 @@ console.clear()
             message = "Bust!"
             winnerEl.textContent = "Dealer wins!"
             isAlive = false
-            console.log ("diabling button")
             document.getElementById("newcard-el").disabled = true;    
         }
     }
-
-
     sumEl.textContent="Sum: " + sum
-
-    // Dealer message
     messageEl.textContent = message
-
-    //render dealer cards
     dealerCardsEl.innerHTML = '<img src="images/back.png" width="75" height="105" margin="15"><img src="images/back.png" width="75" height="105" margin="15">'
-
 }
 
 function newCard(){
-    console.log("Drawing a new card from the deck.")
     let card = getRandomCard()
     cards.push(card)   
     renderGame()
@@ -153,9 +128,7 @@ function getRandomCard(){
     else if (cardobj.value === 11) {cardobj.name="J"; cardobj.value=10}
     else if (cardobj.value === 12) {cardobj.name="Q"; cardobj.value=10}
     else if (cardobj.value === 13) {cardobj.name="K"; cardobj.value=10}  
-
-    sum += cardobj.value
-    
+    sum += cardobj.value  
     return cardobj
 }
 
@@ -163,11 +136,7 @@ function Stick(){
     playerCount = sum
     dealerCards=[]
     dealerCount=0
-    console.log("Stick")
-    console.log("Sticking with - " + sum)
     dealerCards.push(getRandomCard(),getRandomCard())
-    console.log(dealerCards)
-
     dealerCardsEl.innerHTML = ""
     renderDealerCards()
 }
@@ -187,8 +156,6 @@ function renderDealerCards() {
         if (dealerCards[i].suit === "H") {filenamesuit="hearts"}
         
         filename = "images/" + filenamesuit + "_" + filenamevalue + ".png"
-
-        //cardsEl.textContent += cards[i].name + cards[i].suit + " "
         dealerCardsEl.innerHTML += '<img src="'+ filename + '" id=cardimg alt="' +  dealerCards[i].name + dealerCards[i].suit + '" width="75" height="105" margin="15">'
         dealerEval()
     }
@@ -196,32 +163,22 @@ function renderDealerCards() {
 
 function dealerEval(){
     dealerCount=0
-    console.log(dealerCards)
     for(let i = 0; i < dealerCards.length; i++) 
     {
         dealerCount+=dealerCards[i].value
     }
-    console.log("Dealer Count - " + dealerCount)
 
-    if (dealerCount > 16 || dealerCount > playerCount){
-        console.log("Dealer sticks")
-        //dealerStick()
-    }
+    if (dealerCount > 16 || dealerCount > playerCount) {}
     else {
-        console.log("Dealer draws")
         dealerCards.push(getRandomCard())
         dealerEval()
     }
-
-    console.log("Dealer - " + dealerCount)
-    console.log("Player - " + playerCount)
 
     if (dealerCount > playerCount && dealerCount < 22)
     {
         winnerEl.textContent = "Dealer wins!"
     } else {
         winnerEl.textContent = "Player wins!"
-    }
-    
+    }    
 }
 
