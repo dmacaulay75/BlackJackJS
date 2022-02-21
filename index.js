@@ -8,8 +8,18 @@ let messageEl = document.getElementById("message-el")
 let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
+let dealerEl = document.getElementById("dealer-el")
+let dealerCardsEl = document.getElementById("dealercards-el")
+let newCardEl = document.getElementById("newcard-el")
+let stickEl = document.getElementById("stick-el")
+let winnerEl = document.getElementById("winner-el")
+
 let sum = 0
 let cards=[]
+let dealerCards=[]
+let dealerCount=0
+let playerCount=0
+
 const suits = ["C","S","D","H"]
 
 let playername="Player"
@@ -22,7 +32,26 @@ let player ={
 
 playerEl.textContent=""
 
+function startGame(){
+    newCardEl.hidden = false
+    stickEl.hidden = false
+    dealerEl.hidden = false
+    playerEl.hidden = false
+    sumEl.hidden = false
+    playerEl.hidden = false
+    playerEl.textContent = player.name + ": " + "$" + player.chips
+    winnerEl.textContent = ""
+    isAlive = true
+    hasBlackJack = false
+    sum = 0
+    cards=[]
+    cardsEl.innerHTML =""
+    playerCount=0
 
+    cards.push(getRandomCard(),getRandomCard())
+    document.getElementById("newcard-el").disabled = false;
+    renderGame()
+}
 
 function renderGame(){
 console.clear()
@@ -69,6 +98,7 @@ console.clear()
         hasBlackJack = true
         console.log ("diabling button")
         document.getElementById("newcard-el").disabled = true;
+        winnerEl.textContent = "Player wins!"
     }else { // is there an ace I can rurn into a 1
         for(let i = 0; i < cards.length; i++)
         {
@@ -84,6 +114,7 @@ console.clear()
         if (foundanace === false)
         {
             message = "Bust!"
+            winnerEl.textContent = "Dealer wins!"
             isAlive = false
             console.log ("diabling button")
             document.getElementById("newcard-el").disabled = true;    
@@ -95,25 +126,16 @@ console.clear()
 
     // Dealer message
     messageEl.textContent = message
+
+    //render dealer cards
+    dealerCardsEl.innerHTML = '<img src="images/back.png" width="75" height="105" margin="15"><img src="images/back.png" width="75" height="105" margin="15">'
+
 }
 
 function newCard(){
     console.log("Drawing a new card from the deck.")
     let card = getRandomCard()
     cards.push(card)   
-    renderGame()
-}
-
-function startGame(){
-    playerEl.textContent = player.name + ": " + "$" + player.chips
-    isAlive = true
-    hasBlackJack = false
-    sum = 0
-    cards=[]
-    cardsEl.innerHTML =""
-    cards.push(getRandomCard(),getRandomCard())
-    //sum = cards[0].value + cards[1].value
-    document.getElementById("newcard-el").disabled = false;
     renderGame()
 }
 
@@ -135,5 +157,71 @@ function getRandomCard(){
     sum += cardobj.value
     
     return cardobj
+}
+
+function Stick(){
+    playerCount = sum
+    dealerCards=[]
+    dealerCount=0
+    console.log("Stick")
+    console.log("Sticking with - " + sum)
+    dealerCards.push(getRandomCard(),getRandomCard())
+    console.log(dealerCards)
+
+    dealerCardsEl.innerHTML = ""
+    renderDealerCards()
+}
+
+function renderDealerCards() {
+    for(let i = 0; i < dealerCards.length; i++)
+    {
+        if (dealerCards[i].name === "A"){filenamevalue="ace"}
+        else if (dealerCards[i].name === "J"){filenamevalue="jack"}
+        else if (dealerCards[i].name === "Q"){filenamevalue="queen"}
+        else if (dealerCards[i].name === "K"){filenamevalue="king"}
+        else {filenamevalue=dealerCards[i].value}
+
+        if (dealerCards[i].suit === "S") {filenamesuit="spades"}
+        if (dealerCards[i].suit === "C") {filenamesuit="clubs"}
+        if (dealerCards[i].suit === "D") {filenamesuit="diamonds"}
+        if (dealerCards[i].suit === "H") {filenamesuit="hearts"}
+        
+        filename = "images/" + filenamesuit + "_" + filenamevalue + ".png"
+
+        //cardsEl.textContent += cards[i].name + cards[i].suit + " "
+        dealerCardsEl.innerHTML += '<img src="'+ filename + '" id=cardimg alt="' +  dealerCards[i].name + dealerCards[i].suit + '" width="75" height="105" margin="15">'
+        dealerEval()
+    }
+}
+
+function dealerEval(){
+    dealerCount=0
+    console.log(dealerCards)
+    for(let i = 0; i < dealerCards.length; i++) 
+    {
+        dealerCount+=dealerCards[i].value
+    }
+    console.log("Dealer Count - " + dealerCount)
+
+    if (dealerCount > 16 || dealerCount > playerCount){
+        console.log("Dealer sticks")
+        //dealerStick()
+    }
+    else {
+        console.log("Dealer draws")
+        dealerCards.push(getRandomCard())
+        dealerEval()
+    }
+
+    console.log("Dealer - " + dealerCount)
+    console.log("Player - " + playerCount)
+
+    if (dealerCount > playerCount && dealerCount < 22)
+    {
+        winnerEl.textContent = "Dealer wins!"
+    } else {
+        winnerEl.textContent = "Player wins!"
+    }
+    
 }
 

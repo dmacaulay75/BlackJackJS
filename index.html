@@ -5,11 +5,18 @@
     <body>
         <h1>Blackjack</h1>
         <p id="message-el">Want to play a round?</p>
+        <p id="dealer-el", hidden="true">Dealer Cards</p>
+        <p id="dealercards-el"></p>
         <p id="cards-el"></p>
-         <p id="sum-el">Sum:</p>
+        <p id="sum-el", hidden="true">Player Cards Sum:</p>
+        
+        <button id="newcard-el", onclick="newCard()", disabled="true", hidden="true">DRAW!</button>
+        <button id="stick-el", onclick="Stick()", hidden="true">STICK!</button>
+        <p>
         <button id="startgame-el", onclick="startGame()">START GAME!</button>
-        <button id="newcard-el", onclick="newCard()", disabled="true">DRAW!</button>
-        <p id="player-el">Player: $100</p>
+        </p>
+        <p id="player-el", hidden="true">Player: $100</p>
+        <p id="winner-el"></p>
         <script src=index.js></script>
     </body>
 </html>
