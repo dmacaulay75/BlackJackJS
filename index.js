@@ -2,8 +2,6 @@ let hasBlackJack=false
 let isAlive=false
 let foundanace=false
 let message=""
-//let messageEl = document.getElementById("message-el")
-//let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
 
@@ -35,19 +33,15 @@ playerEl.textContent=""
 function startGame(){
     newCardEl.hidden = false
     stickEl.hidden = false
-
     playerEl.hidden = false
-    //sumEl.hidden = false
     playerEl.hidden = false
     playerEl.textContent = player.name + ": " + "$" + player.chips
-
     isAlive = true
     hasBlackJack = false
     sum = 0
     cards=[]
     cardsEl.innerHTML =""
     playerCount=0
-
     speechEl.src="images/speech-what.png"
 
     cards.push(getRandomCard(),getRandomCard())
@@ -56,8 +50,6 @@ function startGame(){
 }
 
 function renderGame(){
-console.clear()
-
     cardsEl.innerHTML =""
     let filename=""
     let filenamesuit=""
@@ -107,8 +99,6 @@ console.clear()
             document.getElementById("newcard-el").disabled = true;    
         }
     }
-    //sumEl.textContent="Sum: " + sum
-    //messageEl.textContent = message
     dealerCardsEl.innerHTML = '<img src="images/back.png" width="75" height="105" margin="15"><img src="images/back.png" width="75" height="105" margin="15">'
 }
 
