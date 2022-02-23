@@ -28,7 +28,7 @@ let player ={
     chips: 200
 }
 
-speechEl.src="/images/speech-playin.png"
+speechEl.src="images/speech-playin.png"
 
 playerEl.textContent=""
 
@@ -48,7 +48,7 @@ function startGame(){
     cardsEl.innerHTML =""
     playerCount=0
 
-    speechEl.src="/images/speech-what.png"
+    speechEl.src="images/speech-what.png"
 
     cards.push(getRandomCard(),getRandomCard())
     document.getElementById("newcard-el").disabled = false;
@@ -87,7 +87,7 @@ console.clear()
         message = "Blackack!"
         hasBlackJack = true
         document.getElementById("newcard-el").disabled = true;
-        speechEl.src="/images/speech-win.png"
+        speechEl.src="images/speech-win.png"
     }else { 
         for(let i = 0; i < cards.length; i++)
         {
@@ -102,7 +102,7 @@ console.clear()
         if (foundanace === false)
         {
             message = "Bust!"
-            speechEl.src="/images/speech-lose.png"
+            speechEl.src="images/speech-lose.png"
             isAlive = false
             document.getElementById("newcard-el").disabled = true;    
         }
@@ -180,9 +180,9 @@ function dealerEval(){
 
     if (dealerCount > playerCount && dealerCount < 22)
     {
-        speechEl.src="/images/speech-lose.png"
+        speechEl.src="images/speech-lose.png"
     } else {
-        speechEl.src="/images/speech-win.png"
+        speechEl.src="images/speech-win.png"
     }    
 }
 
