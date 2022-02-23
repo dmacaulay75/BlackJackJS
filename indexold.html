@@ -2,24 +2,22 @@
     <head>
         <link rel="stylesheet" href="index.css">
     </head>
-    <body>   
-      
-      <div class="benderspeech">
-        <figure class="bender"><img src=/images/bender.png class="benderimg"><img></figure>
-        <figure class="speech"><img src=/images/speech.png class="speechimg" id="speech-el"></figure>
-      </div>      
-          
-      <div class="game">
+    <body>
+        <h1>Blackjack - Hookers not included!</h1>
+        <!--<p id="message-el">Want to play a round?</p>-->
+
+        <p id="dealer-el", hidden="true">Dealer Cards</p>
         <p id="dealercards-el"></p>
         <p id="cards-el"></p>
+        <p id="sum-el", hidden="true">Player Cards Sum:</p>
+        
         <button id="newcard-el", onclick="newCard()", disabled="true", hidden="true">DRAW!</button>
         <button id="stick-el", onclick="Stick()", hidden="true">STICK!</button>
         <p>
         <button id="startgame-el", onclick="startGame()">START GAME!</button>
+        </p>
         <p id="player-el", hidden="true">Player: $100</p>
-      </div>
-         
-      <script src=index.js></script>
-      
+        <p id="winner-el"></p>
+        <script src=index.js></script>
     </body>
 </html>

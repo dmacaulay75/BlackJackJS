@@ -2,15 +2,15 @@ let hasBlackJack=false
 let isAlive=false
 let foundanace=false
 let message=""
-let messageEl = document.getElementById("message-el")
-let sumEl = document.getElementById("sum-el")
+//let messageEl = document.getElementById("message-el")
+//let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
-let dealerEl = document.getElementById("dealer-el")
+
 let dealerCardsEl = document.getElementById("dealercards-el")
 let newCardEl = document.getElementById("newcard-el")
 let stickEl = document.getElementById("stick-el")
-let winnerEl = document.getElementById("winner-el")
+let speechEl = document.getElementById("speech-el")
 
 let sum = 0
 let cards=[]
@@ -28,23 +28,27 @@ let player ={
     chips: 200
 }
 
+speechEl.src="/images/speech-playin.png"
+
 playerEl.textContent=""
 
 function startGame(){
     newCardEl.hidden = false
     stickEl.hidden = false
-    dealerEl.hidden = false
+
     playerEl.hidden = false
-    sumEl.hidden = false
+    //sumEl.hidden = false
     playerEl.hidden = false
     playerEl.textContent = player.name + ": " + "$" + player.chips
-    winnerEl.textContent = ""
+
     isAlive = true
     hasBlackJack = false
     sum = 0
     cards=[]
     cardsEl.innerHTML =""
     playerCount=0
+
+    speechEl.src="/images/speech-what.png"
 
     cards.push(getRandomCard(),getRandomCard())
     document.getElementById("newcard-el").disabled = false;
@@ -83,7 +87,7 @@ console.clear()
         message = "Blackack!"
         hasBlackJack = true
         document.getElementById("newcard-el").disabled = true;
-        winnerEl.textContent = "Player wins!"
+        speechEl.src="/images/speech-win.png"
     }else { 
         for(let i = 0; i < cards.length; i++)
         {
@@ -98,13 +102,13 @@ console.clear()
         if (foundanace === false)
         {
             message = "Bust!"
-            winnerEl.textContent = "Dealer wins!"
+            speechEl.src="/images/speech-lose.png"
             isAlive = false
             document.getElementById("newcard-el").disabled = true;    
         }
     }
-    sumEl.textContent="Sum: " + sum
-    messageEl.textContent = message
+    //sumEl.textContent="Sum: " + sum
+    //messageEl.textContent = message
     dealerCardsEl.innerHTML = '<img src="images/back.png" width="75" height="105" margin="15"><img src="images/back.png" width="75" height="105" margin="15">'
 }
 
@@ -176,9 +180,9 @@ function dealerEval(){
 
     if (dealerCount > playerCount && dealerCount < 22)
     {
-        winnerEl.textContent = "Dealer wins!"
+        speechEl.src="/images/speech-lose.png"
     } else {
-        winnerEl.textContent = "Player wins!"
+        speechEl.src="/images/speech-win.png"
     }    
 }
 
