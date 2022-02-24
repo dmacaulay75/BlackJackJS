@@ -4,7 +4,6 @@ let foundanace=false
 let message=""
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
-
 let dealerCardsEl = document.getElementById("dealercards-el")
 let newCardEl = document.getElementById("newcard-el")
 let stickEl = document.getElementById("stick-el")
@@ -15,9 +14,7 @@ let cards=[]
 let dealerCards=[]
 let dealerCount=0
 let playerCount=0
-
 const suits = ["C","S","D","H"]
-
 let playername="Player"
 let playerchips=200
 

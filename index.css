@@ -7,17 +7,9 @@ body{
     overflow: hidden;   
 }
 
-.benderspeech{
-  position: relative;
-  top: 75;
-  left: 200;
-}
-
-.bender{
+.site{
   position: absolute;
-  left: 500;
-  top: -100;
-  max-height: 300px;
+  width: 1000;
 }
 
 .speech{
@@ -25,6 +17,25 @@ body{
   left: 400;
   top: -85;
 }
+
+.game{
+  position: absolute;
+}
+
+.benderspeech{
+  position: absolute;
+  top: 75;
+  left: 50;
+}
+
+.bender{
+  position: absolute;
+  top: -100;
+  left: 500;
+  max-height: 300px;
+}
+
+
 
 .benderimg{
   max-height: 1000px;
